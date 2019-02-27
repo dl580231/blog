@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuc.blog.dao.RotationChartMapper" >
+  <resultMap id="BaseResultMap" type="com.nuc.blog.entity.RotationChart" >
+    <id column="chart_id" property="chartId" jdbcType="INTEGER" />
+    <result column="chart_content" property="chartContent" jdbcType="VARCHAR" />
+    <result column="show_state" property="showState" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_show_time" property="lastShowTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    chart_id, chart_content, show_state, create_time, last_show_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_rotation_chart
+    where chart_id = #{chartId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_rotation_chart
+    where chart_id = #{chartId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nuc.blog.entity.RotationChart" >
+    insert into tb_rotation_chart (chart_id, chart_content, show_state, 
+      create_time, last_show_time)
+    values (#{chartId,jdbcType=INTEGER}, #{chartContent,jdbcType=VARCHAR}, #{showState,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastShowTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nuc.blog.entity.RotationChart" >
+    insert into tb_rotation_chart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chartId != null" >
+        chart_id,
+      </if>
+      <if test="chartContent != null" >
+        chart_content,
+      </if>
+      <if test="showState != null" >
+        show_state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastShowTime != null" >
+        last_show_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chartId != null" >
+        #{chartId,jdbcType=INTEGER},
+      </if>
+      <if test="chartContent != null" >
+        #{chartContent,jdbcType=VARCHAR},
+      </if>
+      <if test="showState != null" >
+        #{showState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastShowTime != null" >
+        #{lastShowTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nuc.blog.entity.RotationChart" >
+    update tb_rotation_chart
+    <set >
+      <if test="chartContent != null" >
+        chart_content = #{chartContent,jdbcType=VARCHAR},
+      </if>
+      <if test="showState != null" >
+        show_state = #{showState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastShowTime != null" >
+        last_show_time = #{lastShowTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where chart_id = #{chartId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nuc.blog.entity.RotationChart" >
+    update tb_rotation_chart
+    set chart_content = #{chartContent,jdbcType=VARCHAR},
+      show_state = #{showState,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_show_time = #{lastShowTime,jdbcType=TIMESTAMP}
+    where chart_id = #{chartId,jdbcType=INTEGER}
+  </update>
+</mapper>

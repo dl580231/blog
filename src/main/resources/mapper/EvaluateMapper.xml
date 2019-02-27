@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuc.blog.dao.EvaluateMapper" >
+  <resultMap id="BaseResultMap" type="com.nuc.blog.entity.Evaluate" >
+    <id column="evaluate_id" property="evaluateId" jdbcType="INTEGER" />
+    <result column="article_id" property="articleId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="evaluate_content" property="evaluateContent" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_reply_time" property="lastReplyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    evaluate_id, article_id, user_id, evaluate_content, create_time, last_reply_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_evaluate
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_evaluate
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nuc.blog.entity.Evaluate" >
+    insert into tb_evaluate (evaluate_id, article_id, user_id, 
+      evaluate_content, create_time, last_reply_time
+      )
+    values (#{evaluateId,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{evaluateContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastReplyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nuc.blog.entity.Evaluate" >
+    insert into tb_evaluate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="evaluateId != null" >
+        evaluate_id,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="evaluateContent != null" >
+        evaluate_content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastReplyTime != null" >
+        last_reply_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="evaluateId != null" >
+        #{evaluateId,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateContent != null" >
+        #{evaluateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastReplyTime != null" >
+        #{lastReplyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nuc.blog.entity.Evaluate" >
+    update tb_evaluate
+    <set >
+      <if test="articleId != null" >
+        article_id = #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateContent != null" >
+        evaluate_content = #{evaluateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastReplyTime != null" >
+        last_reply_time = #{lastReplyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nuc.blog.entity.Evaluate" >
+    update tb_evaluate
+    set article_id = #{articleId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      evaluate_content = #{evaluateContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_reply_time = #{lastReplyTime,jdbcType=TIMESTAMP}
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </update>
+</mapper>

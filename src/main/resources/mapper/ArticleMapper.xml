@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuc.blog.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.nuc.blog.entity.Article">
+    <id column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="use_id" jdbcType="INTEGER" property="useId" />
+    <result column="article_content" jdbcType="VARCHAR" property="articleContent" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="enable_state" jdbcType="INTEGER" property="enableState" />
+    <result column="hits" jdbcType="INTEGER" property="hits" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_edit_time" jdbcType="TIMESTAMP" property="lastEditTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    article_id, category_id, use_id, article_content, label, priority, enable_state, 
+    hits, create_time, last_edit_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nuc.blog.entity.Article">
+    insert into tb_article (article_id, category_id, use_id, 
+      article_content, label, priority, 
+      enable_state, hits, create_time, 
+      last_edit_time)
+    values (#{articleId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{useId,jdbcType=INTEGER}, 
+      #{articleContent,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, 
+      #{enableState,jdbcType=INTEGER}, #{hits,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nuc.blog.entity.Article">
+    insert into tb_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="useId != null">
+        use_id,
+      </if>
+      <if test="articleContent != null">
+        article_content,
+      </if>
+      <if test="label != null">
+        label,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="enableState != null">
+        enable_state,
+      </if>
+      <if test="hits != null">
+        hits,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastEditTime != null">
+        last_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="useId != null">
+        #{useId,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null">
+        #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="enableState != null">
+        #{enableState,jdbcType=INTEGER},
+      </if>
+      <if test="hits != null">
+        #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastEditTime != null">
+        #{lastEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nuc.blog.entity.Article">
+    update tb_article
+    <set>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="useId != null">
+        use_id = #{useId,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null">
+        article_content = #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="enableState != null">
+        enable_state = #{enableState,jdbcType=INTEGER},
+      </if>
+      <if test="hits != null">
+        hits = #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastEditTime != null">
+        last_edit_time = #{lastEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nuc.blog.entity.Article">
+    update tb_article
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      use_id = #{useId,jdbcType=INTEGER},
+      article_content = #{articleContent,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      enable_state = #{enableState,jdbcType=INTEGER},
+      hits = #{hits,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_edit_time = #{lastEditTime,jdbcType=TIMESTAMP}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.nuc.blog.entity.Article">
+    <id column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="use_id" jdbcType="INTEGER" property="useId" />
+    <result column="article_content" jdbcType="VARCHAR" property="articleContent" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="enable_state" jdbcType="INTEGER" property="enableState" />
+    <result column="hits" jdbcType="INTEGER" property="hits" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_edit_time" jdbcType="TIMESTAMP" property="lastEditTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    article_id, category_id, use_id, article_content, label, priority, enable_state, 
+    hits, create_time, last_edit_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nuc.blog.entity.Article">
+    insert into tb_article (article_id, category_id, use_id, 
+      article_content, label, priority, 
+      enable_state, hits, create_time, 
+      last_edit_time)
+    values (#{articleId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{useId,jdbcType=INTEGER}, 
+      #{articleContent,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, 
+      #{enableState,jdbcType=INTEGER}, #{hits,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nuc.blog.entity.Article">
+    insert into tb_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="useId != null">
+        use_id,
+      </if>
+      <if test="articleContent != null">
+        article_content,
+      </if>
+      <if test="label != null">
+        label,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="enableState != null">
+        enable_state,
+      </if>
+      <if test="hits != null">
+        hits,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastEditTime != null">
+        last_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="useId != null">
+        #{useId,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null">
+        #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="enableState != null">
+        #{enableState,jdbcType=INTEGER},
+      </if>
+      <if test="hits != null">
+        #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastEditTime != null">
+        #{lastEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nuc.blog.entity.Article">
+    update tb_article
+    <set>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="useId != null">
+        use_id = #{useId,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null">
+        article_content = #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="enableState != null">
+        enable_state = #{enableState,jdbcType=INTEGER},
+      </if>
+      <if test="hits != null">
+        hits = #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastEditTime != null">
+        last_edit_time = #{lastEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nuc.blog.entity.Article">
+    update tb_article
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      use_id = #{useId,jdbcType=INTEGER},
+      article_content = #{articleContent,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      enable_state = #{enableState,jdbcType=INTEGER},
+      hits = #{hits,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_edit_time = #{lastEditTime,jdbcType=TIMESTAMP}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+</mapper>

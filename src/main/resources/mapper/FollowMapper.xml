@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuc.blog.dao.FollowMapper" >
+  <resultMap id="BaseResultMap" type="com.nuc.blog.entity.Follow" >
+    <id column="follow_id" property="followId" jdbcType="INTEGER" />
+    <result column="follower_id" property="followerId" jdbcType="INTEGER" />
+    <result column="be_follower_id" property="beFollowerId" jdbcType="INTEGER" />
+    <result column="follow_time" property="followTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    follow_id, follower_id, be_follower_id, follow_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_follow
+    where follow_id = #{followId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_follow
+    where follow_id = #{followId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nuc.blog.entity.Follow" >
+    insert into tb_follow (follow_id, follower_id, be_follower_id, 
+      follow_time)
+    values (#{followId,jdbcType=INTEGER}, #{followerId,jdbcType=INTEGER}, #{beFollowerId,jdbcType=INTEGER}, 
+      #{followTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nuc.blog.entity.Follow" >
+    insert into tb_follow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="followId != null" >
+        follow_id,
+      </if>
+      <if test="followerId != null" >
+        follower_id,
+      </if>
+      <if test="beFollowerId != null" >
+        be_follower_id,
+      </if>
+      <if test="followTime != null" >
+        follow_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="followId != null" >
+        #{followId,jdbcType=INTEGER},
+      </if>
+      <if test="followerId != null" >
+        #{followerId,jdbcType=INTEGER},
+      </if>
+      <if test="beFollowerId != null" >
+        #{beFollowerId,jdbcType=INTEGER},
+      </if>
+      <if test="followTime != null" >
+        #{followTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nuc.blog.entity.Follow" >
+    update tb_follow
+    <set >
+      <if test="followerId != null" >
+        follower_id = #{followerId,jdbcType=INTEGER},
+      </if>
+      <if test="beFollowerId != null" >
+        be_follower_id = #{beFollowerId,jdbcType=INTEGER},
+      </if>
+      <if test="followTime != null" >
+        follow_time = #{followTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where follow_id = #{followId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nuc.blog.entity.Follow" >
+    update tb_follow
+    set follower_id = #{followerId,jdbcType=INTEGER},
+      be_follower_id = #{beFollowerId,jdbcType=INTEGER},
+      follow_time = #{followTime,jdbcType=TIMESTAMP}
+    where follow_id = #{followId,jdbcType=INTEGER}
+  </update>
+</mapper>
